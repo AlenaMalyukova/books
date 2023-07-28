@@ -15,7 +15,7 @@ const routes = [
     component: FavoritesView,
   },
   {
-    path: " /about-the-book",
+    path: "/about-the-book",
     name: "details",
     component: DetailsView,
   },
