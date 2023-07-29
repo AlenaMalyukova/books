@@ -1,18 +1,22 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Главная</router-link> |
+    <router-link to="/favorites">Избранные книги</router-link>
   </nav>
   <router-view />
 </template>
 
 <style>
+body {
+  background: rgb(44, 43, 43);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
 }
 
 nav {
@@ -21,10 +25,10 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #284d72;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #4258b9;
 }
 </style>

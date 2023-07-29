@@ -7,12 +7,12 @@ const books = {
   getters: {},
   mutations: {},
   actions: {
-    async loadAllBooks() {
+    async loadAllBooks(context) {
       try {
         const agent = getAgent();
-        const res = await agent.loadBooks();
+        const response = await agent.loadBooks();
 
-        console.log(res);
+        context.commit("setAllBooks", response.items);
       } catch (err) {
         console.log(err);
       }
