@@ -1,24 +1,30 @@
 <template>
   <div class="card">
     <img
+      v-if="book.volumeInfo.imageLinks?.thumbnail"
       class="card__img"
       :src="book.volumeInfo.imageLinks?.thumbnail"
-      :alt="require('@/assets/images/open-book.png')"
+      alt=""
     />
+    <img v-else class="card__img" src="@/assets/images/open-book.png" alt="" />
     <div class="info">
       <h5 class="info__title">{{ book.volumeInfo.title }}</h5>
       <p v-if="book.volumeInfo.description" class="info__description">
         {{ book.volumeInfo.description }}
       </p>
       <p v-else>Нет описания</p>
-      <AddToFavoritesBtn />
+      <AddToFavoritesBtn
+        :isActive="isFavorite(book)"
+        @click="toggleFavorites(book, id)"
+      />
     </div>
   </div>
   <!-- <router-link to="/about-the-book"></router-link> -->
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
+import store from "@/store";
 import AddToFavoritesBtn from "@/components/features/AddToFavoritesBtn.vue";
 
 defineProps({
@@ -27,6 +33,18 @@ defineProps({
     required: true,
   },
 });
+
+const favoriteBooks = computed(() => store.getters.favoriteBooks);
+// eslint-disable-next-line
+const isFavorite = (book) => !!favoriteBooks.value.find((el) => el.id === book.id);
+
+const toggleFavorites = (book) => {
+  if (isFavorite(book)) {
+    store.commit("deleteFavoritesBook", book);
+  } else {
+    store.commit("addTofavorites", book);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +66,7 @@ defineProps({
 
   &__img {
     min-width: 150px;
+    max-width: 150px;
   }
 }
 
@@ -57,6 +76,7 @@ defineProps({
   text-align: left;
   padding-left: 20px;
   width: 100%;
+  position: relative;
 
   &__description {
     display: -webkit-box;
