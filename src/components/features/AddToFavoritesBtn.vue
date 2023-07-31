@@ -23,9 +23,6 @@ defineProps({ isActive: Boolean });
   cursor: pointer;
   align-self: flex-end;
   vertical-align: bottom;
-  position: absolute;
-  top: 15px;
-  right: 15px;
 
   &__icon {
     max-width: 20px;
