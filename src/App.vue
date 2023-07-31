@@ -1,14 +1,13 @@
 <template>
-  <nav>
-    <router-link to="/">Главная</router-link> |
-    <router-link to="/favorites">Избранные книги</router-link>
-  </nav>
   <router-view />
 </template>
 
 <style>
 body {
   background: rgb(44, 43, 43);
+  margin: 0;
+  padding: 0;
+  transition: 0.5s;
 }
 
 #app {
