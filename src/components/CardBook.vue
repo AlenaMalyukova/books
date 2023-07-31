@@ -1,25 +1,35 @@
 <template>
-  <div class="card">
-    <img
-      v-if="book.volumeInfo.imageLinks?.thumbnail"
-      class="card__img"
-      :src="book.volumeInfo.imageLinks?.thumbnail"
-      alt=""
-    />
-    <img v-else class="card__img" src="@/assets/images/open-book.png" alt="" />
-    <div class="info">
-      <h5 class="info__title">{{ book.volumeInfo.title }}</h5>
-      <p v-if="book.volumeInfo.description" class="info__description">
-        {{ book.volumeInfo.description }}
-      </p>
-      <p v-else>Нет описания</p>
+  <div class="card-wrapper">
+    <router-link class="link" :to="'/book/' + book.id">
+      <div class="card">
+        <img
+          v-if="book.volumeInfo.imageLinks?.thumbnail"
+          class="card__img"
+          :src="book.volumeInfo.imageLinks?.thumbnail"
+          alt=""
+        />
+        <img
+          v-else
+          class="card__img"
+          src="@/assets/images/open-book.png"
+          alt=""
+        />
+        <div class="info">
+          <h5 class="info__title">{{ book.volumeInfo.title }}</h5>
+          <p v-if="book.volumeInfo.description" class="info__description">
+            {{ book.volumeInfo.description }}
+          </p>
+          <p v-else>Нет описания</p>
+        </div>
+      </div>
+    </router-link>
+    <div class="like">
       <AddToFavoritesBtn
         :isActive="isFavorite(book)"
         @click="toggleFavorites(book, id)"
       />
     </div>
   </div>
-  <!-- <router-link to="/about-the-book"></router-link> -->
 </template>
 
 <script setup>
@@ -48,6 +58,9 @@ const toggleFavorites = (book) => {
 </script>
 
 <style lang="scss" scoped>
+.card-wrapper {
+  position: relative;
+}
 .card {
   border: 1px solid #222;
   border-radius: 10px;
@@ -55,7 +68,6 @@ const toggleFavorites = (book) => {
   display: flex;
   justify-content: flex-start;
   background: #222;
-  color: #fff;
   cursor: pointer;
 
   &:hover {
@@ -67,16 +79,24 @@ const toggleFavorites = (book) => {
   &__img {
     min-width: 150px;
     max-width: 150px;
+    height: 200px;
   }
 }
 
+.link {
+  text-decoration: none;
+  color: #fff;
+}
 .info {
   display: flex;
   flex-direction: column;
   text-align: left;
   padding-left: 20px;
   width: 100%;
-  position: relative;
+
+  &__title {
+    max-width: 90%;
+  }
 
   &__description {
     display: -webkit-box;
@@ -85,5 +105,12 @@ const toggleFavorites = (book) => {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.like {
+  position: absolute;
+  z-index: 2;
+  top: 29px;
+  right: 15px;
 }
 </style>
