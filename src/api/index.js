@@ -12,7 +12,19 @@ export const getAgent = () => {
     });
   };
 
+  const getBookById = async (id) => {
+    return await axios({
+      method: "GET",
+      url: "/" + id,
+      params: {
+        country: "RU",
+        langRestrict: "ru",
+      },
+    });
+  };
+
   return {
     loadBooks,
+    getBookById,
   };
 };
