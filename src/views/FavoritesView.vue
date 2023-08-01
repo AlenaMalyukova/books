@@ -10,7 +10,7 @@
 
 <script setup>
 import store from "@/store";
-import { onMounted, ref } from "vue";
+import { onMounted, computed } from "vue";
 import CardBook from "@/components/CardBook.vue";
 import PageSidebar from "@/components/layouts/PageSidebar.vue";
 
@@ -18,9 +18,7 @@ onMounted(async () => {
   await favoriteBooks;
 });
 
-const favoriteBooks = ref(store.getters.favoriteBooks);
-
-console.log(favoriteBooks);
+const favoriteBooks = computed(() => store.getters.favoriteBooks);
 </script>
 
 <style lang="scss" scoped>

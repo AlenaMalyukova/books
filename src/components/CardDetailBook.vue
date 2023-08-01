@@ -70,8 +70,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-console.log(props.book);
 </script>
 
 <style lang="scss" scoped>

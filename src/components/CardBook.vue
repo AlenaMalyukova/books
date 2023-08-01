@@ -24,17 +24,13 @@
       </div>
     </router-link>
     <div class="like">
-      <AddToFavoritesBtn
-        :isActive="isFavorite(book)"
-        @click="toggleFavorites(book, id)"
-      />
+      <AddToFavoritesBtn :book="book" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
-import store from "@/store";
+import { defineProps } from "vue";
 import AddToFavoritesBtn from "@/components/features/AddToFavoritesBtn.vue";
 
 defineProps({
@@ -43,18 +39,6 @@ defineProps({
     required: true,
   },
 });
-
-const favoriteBooks = computed(() => store.getters.favoriteBooks);
-// eslint-disable-next-line
-const isFavorite = (book) => !!favoriteBooks.value.find((el) => el.id === book.id);
-
-const toggleFavorites = (book) => {
-  if (isFavorite(book)) {
-    store.commit("deleteFavoritesBook", book);
-  } else {
-    store.commit("addTofavorites", book);
-  }
-};
 </script>
 
 <style lang="scss" scoped>
