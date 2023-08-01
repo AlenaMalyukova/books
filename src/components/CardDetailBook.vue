@@ -64,7 +64,7 @@
 <script setup>
 import { defineProps } from "vue";
 
-const props = defineProps({
+defineProps({
   book: {
     type: Object,
     required: true,
